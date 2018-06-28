@@ -1,0 +1,32 @@
+1. pycharm���� mysite ������Ʈ ����
+2. Django ��ġ
+3. mysqlclient ��ġ
+   �͹̳ο��� 
+   pip install mysqlclient==1.3.12
+4. ��� ������Ʈ ����
+5. ���丮 ����
+6. settings.py ����
+   1) TIME_ZONE = 'Asia/Seoul'
+   2) DATABASES = {
+   	'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'djdb',
+            'USER': 'djdb',
+            'PASSWORD': 'djdb',
+            'HOST': '127.0.0.1',
+            'PORT': '3306'
+        }
+     }
+7. �⺻������ ��� ������Ʈ�� �����ϴ� ���̺� �����ϱ�
+   �͹̳ο���
+   python manage.by migrate
+
+8. ��� ������Ʈ�� ������ ���� ����
+   python manage.by
+
+9. ���ݱ��� �۾� Ȯ���ϱ�
+   1) ���� �����ϱ�
+      �͹̳ο���
+      python manage.py runserver 0.0.0.0:8888
+   2) �������� ����
+      http://localhost:8888
