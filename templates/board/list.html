@@ -1,4 +1,5 @@
 {% extends "../base.html" %}
+{% load mathfilters %}
 
 {% block css_link %}
 <link href="/assets/css/board.css" rel="stylesheet" type="text/css">
@@ -17,35 +18,27 @@
 						<th>글쓴이</th>
 						<th>조회수</th>
 						<th>작성일</th>
-						<th>&nbsp;</th>
+						{% if request.session.authuser is not None %}
+						<th>삭제</th>
+						{% endif %}
 					</tr>
+					{% for board in board_list %}
 					<tr>
-						<td>3</td>
-						<td><a href="/board/viewform">세 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
+						<td>{{ board_list.count | add:1 | sub:forloop.counter }}</td>
+						<td><a href="/board/viewform?id={{board.id}}">{{ board.title }}</a></td>
+						<td>{{ board.user_id }}</td>
+						<td>{{ board.hit }}</td>
 						<td>2015-10-11 12:04:20</td>
-						<td><a href="" class="del">삭제</a></td>
+						{% if request.session.authuser is not None %}
+						<td><a href="/board/delete?id={{board.id}}" class="del" >삭제</a></td>
+						{% endif %}
 					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="/board/viewform">두 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td><a href="/board/viewform">첫 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-09-25 07:24:32</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
+					{% endfor %}
 				</table>
 				<div class="bottom">
+					{% if request.session.authuser is not None %}
 					<a href="/board/writeform" id="new-book">글쓰기</a>
+					{% endif %}
 				</div>
 			</div>
 {% endblock %}

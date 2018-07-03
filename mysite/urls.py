@@ -24,9 +24,11 @@ import user.views as user_view
 urlpatterns = [
     path('board/', board_views.index),
     path('board/modifyform', board_views.modifyform),
+    path('board/modify', board_views.modify),
     path('board/viewform', board_views.viewform),
     path('board/writeform', board_views.writeform),
     path('board/write', board_views.write),
+    path('board/delete', board_views.delete),
 
     path('guestbook/', guestbook_views.index),
     path('guestbook/add', guestbook_views.add),

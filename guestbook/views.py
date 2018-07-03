@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from guestbook.models import Guestbook
 
 # Create your views here.
+from user.models import User
 
 
 def index(request):
@@ -25,11 +26,12 @@ def delete(request):
 
 
 def add(request):
-    guestbook = Guestbook()
-    guestbook.name = request.POST['name']
-    guestbook.password = request.POST['pass']
-    guestbook.message = request.POST['content']
+    if (request.session['authuser']['name'] is request.POST['name']) and (request.session['authuser']['password'] is request.POST['pass']):
+        guestbook = Guestbook()
+        guestbook.name = request.POST['name']
+        guestbook.password = request.POST['pass']
+        guestbook.message = request.POST['content']
 
-    guestbook.save()
+        guestbook.save()
 
     return HttpResponseRedirect('/guestbook')

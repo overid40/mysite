@@ -18,7 +18,9 @@
 				<td colspan=4><textarea name="content" id="content"></textarea></td>
 			</tr>
 			<tr>
+                {% if request.session.authuser is not None %}
 				<td colspan=4 align=right><input type="submit" VALUE=" 확인 "></td>
+                {% endif %}
 			</tr>
 		</table>
 	</form>
@@ -30,7 +32,9 @@
 					<td>{{ guestbook_list.count | add:1 | sub:forloop.counter }}</td>
 					<td>{{ guestbook.name }}</td>
 					<td>{{ guestbook.regdate | date:'Y-m-d H:i:s' }}</td>
+                    {% if request.session.authuser is not None %}
 					<td><a href="/guestbook/deleteform?id={{guestbook.id}}">삭제</a></td>
+                    {% endif %}
 				</tr>
 				<tr>
 					<td colspan=4>
