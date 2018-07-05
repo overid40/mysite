@@ -26,11 +26,15 @@ def delete(request):
 
 
 def add(request):
-    guestbook = Guestbook()
-    guestbook.name = request.POST['name']
-    guestbook.password = request.POST['pass']
-    guestbook.message = request.POST['content']
+    if (request.session['authuser']['name'] == request.POST['name']) and (request.session['authuser']['password'] == request.POST['pass']):
+        guestbook = Guestbook()
+        guestbook.name = request.POST['name']
+        guestbook.password = request.POST['pass']
+        guestbook.message = request.POST['content']
 
-    guestbook.save()
+        guestbook.save()
 
     return HttpResponseRedirect('/guestbook')
+
+
+
